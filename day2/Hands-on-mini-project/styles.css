@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    color: #1d2a42;
+    line-height: 1.6;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 20px 18px;
+    background: #1d4e8b;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: background 0.25s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+main {
+    max-width: 980px;
+    margin: 32px auto;
+    padding: 0 18px;
+}
+
+.hero {
+    text-align: center;
+    padding: 40px 0 36px;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+}
+
+.hero p {
+    margin-bottom: 24px;
+    color: #3d4f6c;
+}
+
+.hero-cards {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-cards div {
+    background: #fff;
+    padding: 24px;
+    border-radius: 16px;
+    min-width: 140px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+.about-grid {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 32px;
+}
+
+.about-grid > div {
+    flex: 1 1 300px;
+    min-width: 280px;
+}
+
+.profile-card {
+    min-height: 260px;
+    border-radius: 18px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    background: #fff;
+}
+
+.profile-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+form {
+    display: grid;
+    gap: 16px;
+    background: #fff;
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    margin-top: 32px;
+}
+
+label {
+    font-weight: 600;
+    color: #33415d;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d6dce5;
+    border-radius: 12px;
+    font: inherit;
+}
+
+button {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 12px;
+    background: #1d4e8b;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    background: #143e72;
+}
+
+@media (max-width: 760px) {
+    .about-grid {
+        flex-direction: column;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        margin: 24px auto;
+        padding: 0 14px;
+    }
+}
