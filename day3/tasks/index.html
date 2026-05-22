@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 - JavaScript Practice Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .task {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+        }
+        .task h3 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        .output {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            color: #856404;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Day 3 - JavaScript Practice Tasks</h1>
+        
+        <!-- Practice Task 1 -->
+        <div class="task">
+            <h3>Practice Task 1: Change Text with JavaScript</h3>
+            <p>Create a page with a &lt;p&gt; tag that says "Old Text".</p>
+            <p>Use JavaScript to change it to "New Text".</p>
+            
+            <p id="demo">Old Text</p>
+            
+            <button onclick="changeText()">Change Text</button>
+            
+            <div class="output" id="output1"></div>
+            <div class="note">Check the browser console (F12) for more output!</div>
+        </div>
+
+        <!-- Practice Task 2 -->
+        <div class="task">
+            <h3>Practice Task 2: External Script Connection</h3>
+            <p>Create script.js and link it to the project.</p>
+            <p>Add a console log: console.log("JavaScript connected!");</p>
+            
+            <button onclick="task2Demo()">Check Console (F12)</button>
+            
+            <div class="output" id="output2"></div>
+            <div class="note">This message was logged: "JavaScript connected!"</div>
+        </div>
+
+        <!-- Practice Task 3 -->
+        <div class="task">
+            <h3>Practice Task 3: Variables Declaration</h3>
+            <p>Declare let city = "Delhi" and const country = "India".</p>
+            <p>Print them in the console.</p>
+            
+            <button onclick="task3Demo()">Run Task 3</button>
+            
+            <div class="output" id="output3"></div>
+        </div>
+
+        <!-- Practice Task 4 -->
+        <div class="task">
+            <h3>Practice Task 4: Data Types</h3>
+            <p>Create variables of all five primitive types and log them in the console.</p>
+            
+            <button onclick="task4Demo()">Run Task 4</button>
+            
+            <div class="output" id="output4"></div>
+        </div>
+
+        <!-- Practice Task 5 -->
+        <div class="task">
+            <h3>Practice Task 5: Comparison & Logical Operators</h3>
+            <p>Write a script to check if a number is greater than 18.</p>
+            <p>Log "Adult" if true, else "Not Adult".</p>
+            
+            <label for="age">Enter your age:</label><br><br>
+            <input type="number" id="age" placeholder="Enter age" value="20">
+            <button onclick="task5Demo()">Check Age</button>
+            
+            <div class="output" id="output5"></div>
+        </div>
+
+        <!-- Practice Task 6 -->
+        <div class="task">
+            <h3>Practice Task 6: Functions</h3>
+            <p>Write a function multiply(a, b) that returns the product.</p>
+            <p>Write an arrow function isEven(n) that checks if a number is even.</p>
+            
+            <label for="num1">Number 1:</label>
+            <input type="number" id="num1" placeholder="Enter first number" value="5"><br>
+            
+            <label for="num2">Number 2:</label>
+            <input type="number" id="num2" placeholder="Enter second number" value="4"><br>
+            
+            <button onclick="task6Demo()">Multiply Numbers & Check Even</button>
+            
+            <div class="output" id="output6"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Task 1: Change Text
+        function changeText() {
+            document.getElementById("demo").innerHTML = "New Text";
+            document.getElementById("output1").innerHTML = "<strong>✓ Text changed from 'Old Text' to 'New Text'</strong>";
+            console.log("Text changed successfully!");
+        }
+
+        // Task 2: External Script Demo
+        function task2Demo() {
+            console.log("JavaScript connected!");
+            document.getElementById("output2").innerHTML = "<strong>✓ Message logged to console!</strong><br>Check F12 Developer Tools Console.";
+        }
+
+        // Task 3: Variables Declaration
+        function task3Demo() {
+            let city = "Delhi";
+            const country = "India";
+            
+            console.log(city, country);
+            document.getElementById("output3").innerHTML = `
+                <strong>Variables Created:</strong><br>
+                let city = "${city}";<br>
+                const country = "${country}";<br>
+                <strong>Console Output:</strong> ${city}, ${country}
+            `;
+        }
+
+        // Task 4: Data Types
+        function task4Demo() {
+            let name = "Aditi";           // String
+            let age = 21;                 // Number
+            let isStudent = true;         // Boolean
+            let value = null;             // Null
+            let x;                        // Undefined
+            
+            console.log(name, age, isStudent, value, x);
+            document.getElementById("output4").innerHTML = `
+                <strong>Primitive Types:</strong><br>
+                String: "${name}"<br>
+                Number: ${age}<br>
+                Boolean: ${isStudent}<br>
+                Null: ${value}<br>
+                Undefined: ${x}<br>
+                <strong style="color: green;">✓ All 5 primitive types demonstrated!</strong>
+            `;
+        }
+
+        // Task 5: Comparison Operators
+        function task5Demo() {
+            const age = parseInt(document.getElementById("age").value);
+            const result = age > 18 ? "Adult" : "Not Adult";
+            
+            console.log(result);
+            document.getElementById("output5").innerHTML = `
+                <strong>Age Check:</strong><br>
+                Your age: ${age}<br>
+                Is ${age} > 18? ${age > 18}<br>
+                <strong style="color: ${age > 18 ? 'green' : 'red'}; font-size: 18px;">${result}</strong>
+            `;
+        }
+
+        // Task 6: Functions
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        const isEven = (n) => n % 2 === 0;
+
+        function task6Demo() {
+            const num1 = parseInt(document.getElementById("num1").value);
+            const num2 = parseInt(document.getElementById("num2").value);
+            
+            const product = multiply(num1, num2);
+            const evenCheck1 = isEven(num1);
+            const evenCheck2 = isEven(num2);
+            
+            console.log(`${num1} * ${num2} = ${product}`);
+            console.log(`${num1} is ${evenCheck1 ? 'even' : 'odd'}`);
+            console.log(`${num2} is ${evenCheck2 ? 'even' : 'odd'}`);
+            
+            document.getElementById("output6").innerHTML = `
+                <strong>Function Results:</strong><br>
+                multiply(${num1}, ${num2}) = <strong>${product}</strong><br>
+                isEven(${num1}) = ${evenCheck1} (${num1} is ${evenCheck1 ? 'even' : 'odd'})<br>
+                isEven(${num2}) = ${evenCheck2} (${num2} is ${evenCheck2 ? 'even' : 'odd'})
+            `;
+        }
+
+        // Log on page load
+        console.log("JavaScript connected!");
+    </script>
+</body>
+</html>

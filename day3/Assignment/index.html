@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 - JavaScript Assignments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #28a745;
+            padding-bottom: 10px;
+        }
+        .assignment {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #28a745;
+            border-radius: 5px;
+        }
+        .assignment h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+        .output {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        input {
+            padding: 8px 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 200px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 3 - JavaScript Assignments</h1>
+        
+        <!-- Assignment 1: Positive, Negative, Zero -->
+        <div class="assignment">
+            <h3>Assignment 1: Check Positive, Negative, or Zero</h3>
+            <p>Write a program to check if a number is positive, negative, or zero.</p>
+            
+            <label for="num1">Enter a number:</label><br>
+            <input type="number" id="num1" placeholder="Enter any number" value="5">
+            <button onclick="assignment1()">Check Number</button>
+            
+            <div class="output" id="output1"></div>
+        </div>
+
+        <!-- Assignment 2: Max of Three Numbers -->
+        <div class="assignment">
+            <h3>Assignment 2: Find Maximum of Three Numbers</h3>
+            <p>Create a function max(a, b, c) to return the largest of three numbers.</p>
+            
+            <label for="a">Number 1:</label>
+            <input type="number" id="a" placeholder="Enter first number" value="10"><br>
+            
+            <label for="b">Number 2:</label>
+            <input type="number" id="b" placeholder="Enter second number" value="25"><br>
+            
+            <label for="c">Number 3:</label>
+            <input type="number" id="c" placeholder="Enter third number" value="15"><br>
+            
+            <button onclick="assignment2()">Find Maximum</button>
+            
+            <div class="output" id="output2"></div>
+        </div>
+
+        <!-- Assignment 3: Multiplication Table -->
+        <div class="assignment">
+            <h3>Assignment 3: Print Multiplication Table</h3>
+            <p>Build a script that takes a number and prints its multiplication table (1–10).</p>
+            
+            <label for="tableNum">Enter a number:</label><br>
+            <input type="number" id="tableNum" placeholder="Enter a number" value="7">
+            <button onclick="assignment3()">Generate Table</button>
+            
+            <div class="output" id="output3"></div>
+        </div>
+
+        <!-- Assignment 4: Calculator with Even/Odd Check -->
+        <div class="assignment">
+            <h3>Assignment 4: Extended Calculator (Even/Odd Check)</h3>
+            <p>Extend the calculator project to include an option for checking if a number is even or odd.</p>
+            
+            <label for="calcNum1">Number 1:</label>
+            <input type="number" id="calcNum1" placeholder="Enter first number" value="10"><br>
+            
+            <label for="calcNum2">Number 2:</label>
+            <input type="number" id="calcNum2" placeholder="Enter second number" value="5"><br>
+            
+            <label for="operation">Operation:</label>
+            <select id="operation" style="padding: 8px 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+                <option value="multiply">Multiply</option>
+                <option value="divide">Divide</option>
+            </select><br>
+            
+            <button onclick="assignment4()">Calculate & Check Even/Odd</button>
+            
+            <div class="output" id="output4"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Assignment 1: Check Positive, Negative, Zero
+        function assignment1() {
+            const num = parseInt(document.getElementById("num1").value);
+            let result;
+            
+            if (num > 0) {
+                result = "Positive";
+            } else if (num < 0) {
+                result = "Negative";
+            } else {
+                result = "Zero";
+            }
+            
+            document.getElementById("output1").innerHTML = `
+                <strong>Input:</strong> ${num}<br>
+                <strong>Result:</strong> ${result}<br>
+                <strong style="font-size: 16px;">✓ ${num} is ${result}</strong>
+            `;
+            console.log(`${num} is ${result}`);
+        }
+
+        // Assignment 2: Max of Three Numbers
+        function max(a, b, c) {
+            if (a >= b && a >= c) return a;
+            if (b >= a && b >= c) return b;
+            return c;
+        }
+
+        function assignment2() {
+            const a = parseInt(document.getElementById("a").value);
+            const b = parseInt(document.getElementById("b").value);
+            const c = parseInt(document.getElementById("c").value);
+            
+            const maximum = max(a, b, c);
+            
+            document.getElementById("output2").innerHTML = `
+                <strong>Input Numbers:</strong> ${a}, ${b}, ${c}<br>
+                <strong>Maximum:</strong> <span style="font-size: 18px; font-weight: bold;">${maximum}</span><br>
+                <strong>Comparison:</strong> ${maximum} ≥ ${a}, ${b}, ${c}
+            `;
+            console.log(`max(${a}, ${b}, ${c}) = ${maximum}`);
+        }
+
+        // Assignment 3: Multiplication Table
+        function assignment3() {
+            const num = parseInt(document.getElementById("tableNum").value);
+            let table = `<strong>Multiplication Table of ${num}:</strong><br>`;
+            
+            for (let i = 1; i <= 10; i++) {
+                table += `${num} × ${i} = ${num * i}<br>`;
+            }
+            
+            document.getElementById("output3").innerHTML = table;
+            console.log(`Multiplication table of ${num} generated`);
+        }
+
+        // Assignment 4: Extended Calculator
+        function assignment4() {
+            const num1 = parseInt(document.getElementById("calcNum1").value);
+            const num2 = parseInt(document.getElementById("calcNum2").value);
+            const operation = document.getElementById("operation").value;
+            
+            let result;
+            let operationSymbol;
+            
+            switch(operation) {
+                case "add":
+                    result = num1 + num2;
+                    operationSymbol = "+";
+                    break;
+                case "subtract":
+                    result = num1 - num2;
+                    operationSymbol = "-";
+                    break;
+                case "multiply":
+                    result = num1 * num2;
+                    operationSymbol = "×";
+                    break;
+                case "divide":
+                    result = num2 !== 0 ? (num1 / num2).toFixed(2) : "Error (Division by 0)";
+                    operationSymbol = "÷";
+                    break;
+            }
+            
+            const isResultEven = typeof result === "number" ? (result % 2 === 0) : "N/A";
+            
+            document.getElementById("output4").innerHTML = `
+                <strong>Calculation:</strong><br>
+                ${num1} ${operationSymbol} ${num2} = <span style="font-size: 18px; font-weight: bold;">${result}</span><br>
+                <strong>Even/Odd Check:</strong><br>
+                Is ${result} even? ${isResultEven === "N/A" ? "N/A" : (isResultEven ? "Yes (Even)" : "No (Odd)")}<br>
+                <strong style="color: green;">✓ Calculation complete!</strong>
+            `;
+            console.log(`${num1} ${operationSymbol} ${num2} = ${result}, Is even: ${isResultEven}`);
+        }
+    </script>
+</body>
+</html>

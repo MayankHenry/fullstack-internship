@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator - Day 3 Mini Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>🧮 Simple Calculator</h1>
+            <p class="subtitle">JavaScript Basics - Day 3 Mini Project</p>
+            
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="input1">Number 1:</label>
+                    <input type="number" id="input1" placeholder="Enter first number" value="10">
+                </div>
+                
+                <div class="input-group">
+                    <label for="input2">Number 2:</label>
+                    <input type="number" id="input2" placeholder="Enter second number" value="5">
+                </div>
+            </div>
+
+            <!-- Operation Buttons -->
+            <div class="operation-section">
+                <h3>Select Operation:</h3>
+                <div class="button-group">
+                    <button onclick="calculate('add')" class="op-btn">➕ Add</button>
+                    <button onclick="calculate('subtract')" class="op-btn">➖ Subtract</button>
+                    <button onclick="calculate('multiply')" class="op-btn">✖️ Multiply</button>
+                    <button onclick="calculate('divide')" class="op-btn">➗ Divide</button>
+                </div>
+            </div>
+
+            <!-- Extended Features -->
+            <div class="extended-section">
+                <h3>Extended Features:</h3>
+                <div class="button-group">
+                    <button onclick="checkEvenOdd()" class="ext-btn">🔢 Check Even/Odd</button>
+                    <button onclick="calculatePower()" class="ext-btn">⚡ Power (a^b)</button>
+                    <button onclick="calculateModulo()" class="ext-btn">📊 Modulo (a % b)</button>
+                </div>
+            </div>
+
+            <!-- Result Display -->
+            <div class="result-section">
+                <h2>Result:</h2>
+                <div id="result" class="result-display">
+                    <p>Enter numbers and select an operation</p>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div class="history-section">
+                <h3>📜 Calculation History:</h3>
+                <div id="history" class="history-display">
+                    <p style="color: #999;">No calculations yet</p>
+                </div>
+                <button onclick="clearHistory()" class="clear-btn">Clear History</button>
+            </div>
+
+            <!-- Reset Button -->
+            <button onclick="reset()" class="reset-btn">🔄 Reset All</button>
+        </div>
+
+        <!-- Console Output for Learning -->
+        <div class="console-section">
+            <h3>📋 Console Output (Open F12 to see more):</h3>
+            <div id="console-output" class="console-display"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
