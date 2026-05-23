@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 - JavaScript Control Structures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 940px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+        }
+        .section h3 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        .output {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+        input, select {
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 320px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            color: #856404;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 4 - JavaScript Control Structures</h1>
+
+        <div class="section">
+            <h3>Practice Task 1: Positive or Negative</h3>
+            <p>Check whether the number is positive, negative, or zero.</p>
+            <input type="number" id="positiveNegativeInput" placeholder="Enter a number" value="5">
+            <button onclick="checkPositiveNegative()">Check Number</button>
+            <div class="output" id="outputPositiveNegative"></div>
+        </div>
+
+        <div class="section">
+            <h3>Practice Task 2: Temperature Check</h3>
+            <p>Show <strong>Hot</strong> for above 30, <strong>Warm</strong> for 15–30, otherwise <strong>Cold</strong>.</p>
+            <input type="number" id="temperatureInput" placeholder="Enter temperature" value="22">
+            <button onclick="checkTemperature()">Check Temperature</button>
+            <div class="output" id="outputTemperature"></div>
+        </div>
+
+        <div class="section">
+            <h3>Practice Task 3: Month Name with Switch</h3>
+            <p>Enter a number between 1 and 12 to print the month name.</p>
+            <input type="number" id="monthInput" placeholder="Enter month number" value="5" min="1" max="12">
+            <button onclick="showMonthName()">Show Month</button>
+            <div class="output" id="outputMonth"></div>
+        </div>
+
+        <div class="section">
+            <h3>Practice Task 4: Loops</h3>
+            <p>Use loops to print sequences and array values.</p>
+            <button onclick="runLoopTasks()">Run Loop Tasks</button>
+            <div class="output" id="outputLoops"></div>
+        </div>
+
+        <div class="section">
+            <h3>Practice Task 5: Skip 5 with Continue</h3>
+            <p>Print numbers 1–10 but skip 5 using <code>continue</code>.</p>
+            <button onclick="skipFive()">Run Task</button>
+            <div class="output" id="outputSkipFive"></div>
+        </div>
+
+        <div class="section">
+            <h3>Assignment 1: Multiplication Table</h3>
+            <p>Print the multiplication table from 1 to 10 for the entered number.</p>
+            <input type="number" id="tableInput" placeholder="Enter a number" value="7">
+            <button onclick="generateTable()">Generate Table</button>
+            <div class="output" id="outputTable"></div>
+        </div>
+
+        <div class="section">
+            <h3>Assignment 2: Prime Checker</h3>
+            <p>Check whether the entered number is a prime number.</p>
+            <input type="number" id="primeInput" placeholder="Enter a number" value="29" min="0">
+            <button onclick="checkPrime()">Check Prime</button>
+            <div class="output" id="outputPrime"></div>
+        </div>
+
+        <div class="section">
+            <h3>Assignment 3: Sum from 1 to 100</h3>
+            <p>Calculate and display the sum of all numbers from 1 to 100.</p>
+            <button onclick="calculateSum()">Calculate Sum</button>
+            <div class="output" id="outputSum"></div>
+        </div>
+
+        <div class="section">
+            <h3>Assignment 4: Extended Number Guessing Game</h3>
+            <p>Open the mini project to play the number guessing game with a 5-attempt limit.</p>
+            <p><a href="../Hands-on-mini-project/index.html">Open Number Guessing Game</a></p>
+        </div>
+    </div>
+
+    <script>
+        function checkPositiveNegative() {
+            const value = Number(document.getElementById('positiveNegativeInput').value);
+            let result;
+            if (value > 0) {
+                result = 'Positive';
+            } else if (value < 0) {
+                result = 'Negative';
+            } else {
+                result = 'Zero';
+            }
+            document.getElementById('outputPositiveNegative').innerHTML = `Input: ${value}<br>Result: ${result}`;
+        }
+
+        function checkTemperature() {
+            const temp = Number(document.getElementById('temperatureInput').value);
+            let message;
+            if (temp > 30) {
+                message = 'Hot';
+            } else if (temp >= 15) {
+                message = 'Warm';
+            } else {
+                message = 'Cold';
+            }
+            document.getElementById('outputTemperature').innerHTML = `Temperature: ${temp}°C<br>Condition: ${message}`;
+        }
+
+        function showMonthName() {
+            const monthNumber = Number(document.getElementById('monthInput').value);
+            let monthName;
+            switch (monthNumber) {
+                case 1: monthName = 'January'; break;
+                case 2: monthName = 'February'; break;
+                case 3: monthName = 'March'; break;
+                case 4: monthName = 'April'; break;
+                case 5: monthName = 'May'; break;
+                case 6: monthName = 'June'; break;
+                case 7: monthName = 'July'; break;
+                case 8: monthName = 'August'; break;
+                case 9: monthName = 'September'; break;
+                case 10: monthName = 'October'; break;
+                case 11: monthName = 'November'; break;
+                case 12: monthName = 'December'; break;
+                default: monthName = 'Invalid month number';
+            }
+            document.getElementById('outputMonth').innerHTML = `Month number: ${monthNumber}<br>Month name: ${monthName}`;
+        }
+
+        function runLoopTasks() {
+            let output = 'For loop 1 to 10:<br>';
+            for (let i = 1; i <= 10; i++) {
+                output += i + (i < 10 ? ', ' : '');
+            }
+            output += '<br><br>While loop even numbers 1 to 20:<br>';
+            let j = 1;
+            const evens = [];
+            while (j <= 20) {
+                if (j % 2 === 0) {
+                    evens.push(j);
+                }
+                j++;
+            }
+            output += evens.join(', ');
+            output += '<br><br>For...of array iteration:<br>';
+            const fruits = ['Apple', 'Banana', 'Mango'];
+            for (const fruit of fruits) {
+                output += fruit + ', ';
+            }
+            output = output.replace(/,\s*$/, '');
+            document.getElementById('outputLoops').innerHTML = output;
+        }
+
+        function skipFive() {
+            const values = [];
+            for (let i = 1; i <= 10; i++) {
+                if (i === 5) {
+                    continue;
+                }
+                values.push(i);
+            }
+            document.getElementById('outputSkipFive').innerHTML = values.join(', ');
+        }
+
+        function generateTable() {
+            const number = Number(document.getElementById('tableInput').value);
+            let result = `Multiplication table for ${number}:<br>`;
+            for (let i = 1; i <= 10; i++) {
+                result += `${number} × ${i} = ${number * i}<br>`;
+            }
+            document.getElementById('outputTable').innerHTML = result;
+        }
+
+        function checkPrime() {
+            const num = Number(document.getElementById('primeInput').value);
+            if (num < 2) {
+                document.getElementById('outputPrime').innerHTML = `${num} is not a prime number.`;
+                return;
+            }
+            let isPrime = true;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            document.getElementById('outputPrime').innerHTML = `${num} is ${isPrime ? '' : 'not '}a prime number.`;
+        }
+
+        function calculateSum() {
+            let sum = 0;
+            for (let i = 1; i <= 100; i++) {
+                sum += i;
+            }
+            document.getElementById('outputSum').innerHTML = `Sum of numbers from 1 to 100 = ${sum}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.game-card {
+    background-color: white;
+    padding: 36px;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-card h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.primary-btn,
+.secondary-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.primary-btn {
+    background-color: #667eea;
+    color: white;
+}
+
+.secondary-btn {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.primary-btn:hover {
+    background-color: #5568d3;
+}
+
+.secondary-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.status-panel {
+    margin-top: 25px;
+    padding: 18px;
+    background-color: #f7f7fb;
+    border-radius: 10px;
+    border: 1px solid #e7e7ef;
+}
+
+.message {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.attempts {
+    color: #555;
+    font-size: 14px;
+}
+
+.result-panel {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: #eef2ff;
+    color: #333;
+    border-radius: 10px;
+    min-height: 50px;
+    font-size: 15px;
+}
