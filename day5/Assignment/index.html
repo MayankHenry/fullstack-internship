@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5 - Functions & Scope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f6ff;
+        }
+        .container {
+            background-color: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #2a3d66;
+            margin-bottom: 18px;
+        }
+        .section {
+            margin: 24px 0;
+            padding: 18px;
+            background-color: #f7f9ff;
+            border-left: 5px solid #4c7cff;
+            border-radius: 10px;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #2a3d66;
+        }
+        .output {
+            margin-top: 14px;
+            padding: 14px;
+            background-color: #eef4ff;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #1c2b4a;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #4c7cff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #3a62d7;
+        }
+        input {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px;
+            border: 1px solid #cbd3e7;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        .link-box {
+            margin-top: 20px;
+            padding: 16px;
+            background: #fff8e8;
+            border: 1px solid #f1d89d;
+            border-radius: 8px;
+        }
+        a {
+            color: #3152c5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 5 — Functions in Depth & JavaScript Scope</h1>
+
+        <div class="section">
+            <h2>Practice Task 1: sayHello()</h2>
+            <p>Call <code>sayHello()</code> three times and show the output.</p>
+            <button onclick="runSayHello()">Run sayHello()</button>
+            <div class="output" id="outputSayHello"></div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 2: square(n)</h2>
+            <p>Enter a number and get its square.</p>
+            <input type="number" id="squareInput" value="6">
+            <button onclick="runSquare()">Calculate Square</button>
+            <div class="output" id="outputSquare"></div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 3: isEven(num)</h2>
+            <p>Check the same number using declaration, expression, and arrow function versions.</p>
+            <input type="number" id="evenInput" value="8">
+            <button onclick="runIsEven()">Check Even</button>
+            <div class="output" id="outputIsEven"></div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 4: Scope & Hoisting</h2>
+            <p>See local variable scope and block/var accessibility.</p>
+            <button onclick="runScopeDemo()">Show Scope Demo</button>
+            <div class="output" id="outputScope"></div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 5: calculate(a, b, operation)</h2>
+            <p>Use a callback operation to add, subtract, or multiply.</p>
+            <button onclick="runCallbacks()">Run Callback Examples</button>
+            <div class="output" id="outputCallbacks"></div>
+        </div>
+
+        <div class="section">
+            <h2>Assignment</h2>
+            <p>Try these function assignments below.</p>
+            <label>Factorial input</label>
+            <input type="number" id="factorialInput" value="5" min="0">
+            <button onclick="runFactorial()">Compute Factorial</button>
+            <div class="output" id="outputFactorial"></div>
+
+            <label style="margin-top: 16px; display:block;">Reverse string</label>
+            <input type="text" id="reverseInput" value="Hello">
+            <button onclick="runReverseString()">Reverse String</button>
+            <div class="output" id="outputReverse"></div>
+
+            <label style="margin-top: 16px; display:block;">Palindrome check</label>
+            <input type="text" id="palindromeInput" value="level">
+            <button onclick="runPalindrome()">Check Palindrome</button>
+            <div class="output" id="outputPalindrome"></div>
+        </div>
+
+        <div class="link-box">
+            <p>Open the Day 5 mini project for the To-Do List console-style app.</p>
+            <p><a href="../Hands-on-mini-project/index.html">Open Day 5 To-Do List Mini Project</a></p>
+        </div>
+    </div>
+
+    <script>
+        function sayHello() {
+            return 'Hello Student';
+        }
+
+        function runSayHello() {
+            let output = '';
+            for (let i = 1; i <= 3; i++) {
+                output += `${i}. ${sayHello()}\n`;
+            }
+            document.getElementById('outputSayHello').textContent = output;
+        }
+
+        function square(n) {
+            return n * n;
+        }
+
+        function runSquare() {
+            const value = Number(document.getElementById('squareInput').value);
+            const result = square(value);
+            document.getElementById('outputSquare').textContent = `square(${value}) = ${result}`;
+        }
+
+        function isEvenDeclaration(num) {
+            return num % 2 === 0;
+        }
+
+        const isEvenExpression = function(num) {
+            return num % 2 === 0;
+        };
+
+        const isEvenArrow = num => num % 2 === 0;
+
+        function runIsEven() {
+            const num = Number(document.getElementById('evenInput').value);
+            const results = [];
+            results.push(`Declaration: ${isEvenDeclaration(num)}`);
+            results.push(`Expression: ${isEvenExpression(num)}`);
+            results.push(`Arrow: ${isEvenArrow(num)}`);
+            document.getElementById('outputIsEven').textContent = results.join('\n');
+        }
+
+        function scopeDemo() {
+            let localValue = 'inside function';
+            let result = `localValue inside function: ${localValue}\n`;
+
+            if (true) {
+                var blockVar = 'I am var inside block';
+                let blockLet = 'I am let inside block';
+                const blockConst = 'I am const inside block';
+                result += `blockVar is accessible inside block: ${blockVar}\n`;
+                result += `blockLet is accessible inside block: ${blockLet}\n`;
+                result += `blockConst is accessible inside block: ${blockConst}\n`;
+            }
+
+            result += `blockVar outside block: ${blockVar}\n`;
+            result += 'blockLet outside block: ReferenceError (not accessible)\n';
+            result += 'blockConst outside block: ReferenceError (not accessible)\n';
+            return result;
+        }
+
+        function runScopeDemo() {
+            const localOutput = scopeDemo();
+            document.getElementById('outputScope').textContent = localOutput;
+        }
+
+        function calculate(a, b, operation) {
+            return operation(a, b);
+        }
+
+        function runCallbacks() {
+            const add = (x, y) => x + y;
+            const subtract = (x, y) => x - y;
+            const multiply = (x, y) => x * y;
+
+            const results = [];
+            results.push(`add(8, 3) = ${calculate(8, 3, add)}`);
+            results.push(`subtract(8, 3) = ${calculate(8, 3, subtract)}`);
+            results.push(`multiply(8, 3) = ${calculate(8, 3, multiply)}`);
+            document.getElementById('outputCallbacks').textContent = results.join('\n');
+        }
+
+        function factorial(n) {
+            if (n <= 1) return 1;
+            return n * factorial(n - 1);
+        }
+
+        function runFactorial() {
+            const value = Number(document.getElementById('factorialInput').value);
+            const result = factorial(value);
+            document.getElementById('outputFactorial').textContent = `${value}! = ${result}`;
+        }
+
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
+
+        function runReverseString() {
+            const value = document.getElementById('reverseInput').value;
+            const result = reverseString(value);
+            document.getElementById('outputReverse').textContent = `Reverse of "${value}" is "${result}"`;
+        }
+
+        function isPalindrome(str) {
+            const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+            return cleaned === cleaned.split('').reverse().join('');
+        }
+
+        function runPalindrome() {
+            const value = document.getElementById('palindromeInput').value;
+            const result = isPalindrome(value);
+            document.getElementById('outputPalindrome').textContent = `"${value}" is ${result ? '' : 'not '}a palindrome`;
+        }
+    </script>
+</body>
+</html>
