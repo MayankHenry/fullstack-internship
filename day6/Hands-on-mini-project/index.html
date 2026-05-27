@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 Mini Project - Interactive To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="todo-card">
+            <h1>Interactive To-Do List</h1>
+            <p class="subtitle">Add tasks, mark them complete, delete items, and clear the whole list.</p>
+
+            <div class="input-group">
+                <input id="taskInput" type="text" placeholder="New Task" autocomplete="off" />
+                <button id="addBtn" class="primary-btn">Add Task</button>
+                <button id="clearBtn" class="secondary-btn">Clear All</button>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+            <div class="message" id="message">Start by adding a task.</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

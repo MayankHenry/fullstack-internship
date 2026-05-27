@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 - DOM Manipulation & Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef3ff;
+            color: #22304d;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 940px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 16px 40px rgba(43, 73, 154, 0.12);
+        }
+        h1, h2 {
+            color: #2c3f72;
+            margin-top: 0;
+        }
+        .section {
+            border: 1px solid #d9e2ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 22px;
+            background: #f7f9ff;
+        }
+        .section p {
+            margin: 0 0 12px;
+        }
+        input, button, select {
+            font-size: 15px;
+            border-radius: 10px;
+            border: 1px solid #b8c4e2;
+            padding: 10px 14px;
+            margin-right: 8px;
+            margin-top: 6px;
+        }
+        button {
+            background: #4f74ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #405ee0;
+        }
+        #practiceList {
+            margin-top: 14px;
+            padding-left: 20px;
+        }
+        .output-box {
+            margin-top: 12px;
+            padding: 14px;
+            background: #eef2ff;
+            border-radius: 10px;
+            min-height: 48px;
+            color: #1c2c4a;
+        }
+        .link-box {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            background: #fff8e8;
+            border: 1px solid #f3d9a8;
+        }
+        a {
+            color: #2c58d4;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 6 — DOM Manipulation & Events</h1>
+        <p>Use JavaScript to select page elements, change content and styles, react to events, and create/remove elements.</p>
+
+        <div class="section">
+            <h2>Practice Task 1</h2>
+            <p>Create a paragraph with an ID and change its color and font size with JavaScript.</p>
+            <p id="para">This paragraph will change style when you click the button.</p>
+            <button onclick="changeParaStyle()">Change Paragraph Style</button>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 2</h2>
+            <p>Create a button that changes the page background color.</p>
+            <button onclick="changeBgColor()">Change Background</button>
+            <div class="output-box" id="bgOutput">Current color: <strong>light</strong></div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 3</h2>
+            <p>Type text in the box and see it appear in real time below.</p>
+            <input id="liveInput" type="text" placeholder="Type here..." onkeyup="updateLiveText()" />
+            <div class="output-box" id="liveText">Live text appears here.</div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Task 4</h2>
+            <p>Use a button to add a new item to the list.</p>
+            <input id="itemInput" type="text" placeholder="New item text" />
+            <button onclick="addListItem()">Add Item</button>
+            <ul id="practiceList"></ul>
+        </div>
+
+        <div class="section">
+            <h2>Mini Project Link</h2>
+            <p>Open the Day 6 Interactive To-Do List mini project.</p>
+            <div class="link-box">
+                <a href="../Hands-on-mini-project/index.html">Open Day 6 To-Do List Mini Project</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeParaStyle() {
+            const para = document.getElementById('para');
+            para.style.color = '#2c63ff';
+            para.style.fontSize = '22px';
+            para.style.fontWeight = '600';
+            para.textContent = 'The paragraph style has been changed using the DOM!';
+        }
+
+        function changeBgColor() {
+            const colors = ['#fdf2e9', '#e8f2ff', '#e9f8f2', '#fff0f0'];
+            const next = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = next;
+            document.getElementById('bgOutput').textContent = `Current color: ${next}`;
+        }
+
+        function updateLiveText() {
+            const value = document.getElementById('liveInput').value;
+            document.getElementById('liveText').textContent = value || 'Live text appears here.';
+        }
+
+        function addListItem() {
+            const input = document.getElementById('itemInput');
+            const value = input.value.trim();
+            if (!value) {
+                alert('Please type an item first.');
+                return;
+            }
+            const li = document.createElement('li');
+            li.textContent = value;
+            document.getElementById('practiceList').appendChild(li);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
