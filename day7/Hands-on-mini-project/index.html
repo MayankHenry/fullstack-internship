@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Student Records App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Student Records App</h1>
+
+    <section class="panel">
+      <h2>All Students</h2>
+      <ul id="studentsList"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Toppers (marks ≥ 80)</h2>
+      <ul id="toppersList"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Class Average</h2>
+      <p id="average">0</p>
+    </section>
+
+    <section class="panel">
+      <h2>Add Student</h2>
+      <form id="addForm">
+        <input id="name" placeholder="Name" required>
+        <input id="age" type="number" placeholder="Age" required>
+        <input id="marks" type="number" placeholder="Marks" required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Day 7 - Advanced JavaScript</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:20px;line-height:1.5}
+    pre{background:#f4f4f4;padding:12px;border-radius:6px}
+    h1,h2{color:#222}
+  </style>
+</head>
+<body>
+  <h1>Day 7 – Assignment Solutions</h1>
+
+  <section id="assignment-solutions">
+    <h2>Assignment Solutions</h2>
+
+    <div>
+      <h3>1. Even Numbers from an Array</h3>
+      <pre id="even-output"></pre>
+    </div>
+
+    <div>
+      <h3>2. Laptop Object with <code>details()</code></h3>
+      <pre id="laptop-output"></pre>
+    </div>
+
+    <div>
+      <h3>3. Marks: Highest, Lowest, and Average</h3>
+      <pre id="marks-output"></pre>
+    </div>
+
+    <div>
+      <h3>4. Student Records App</h3>
+      <p>Use the form below to add a new student.</p>
+      <form id="student-form">
+        <label>
+          Name:
+          <input type="text" id="student-name" required placeholder="Enter student name">
+        </label>
+        <label>
+          Age:
+          <input type="number" id="student-age" required min="1" placeholder="Enter age">
+        </label>
+        <label>
+          Marks:
+          <input type="number" id="student-marks" required min="0" max="100" placeholder="Enter marks">
+        </label>
+        <button type="submit">Add Student</button>
+      </form>
+
+      <div id="student-records-output"></div>
+    </div>
+  </section>
+
+  <script>
+    const evenNumbers = [2, 5, 8, 13, 22, 29, 40].filter(num => num % 2 === 0);
+    document.getElementById('even-output').textContent = `Even numbers: ${evenNumbers.join(', ')}`;
+
+    const Laptop = {
+      brand: 'HP',
+      ram: '16GB',
+      price: 55000,
+      details() {
+        return `Brand: ${this.brand}, RAM: ${this.ram}, Price: ₹${this.price}`;
+      }
+    };
+    document.getElementById('laptop-output').textContent = Laptop.details();
+
+    const marks = [78, 92, 65, 84, 55, 99];
+    const highestMark = Math.max(...marks);
+    const lowestMark = Math.min(...marks);
+    const averageMark = marks.reduce((sum, value) => sum + value, 0) / marks.length;
+    document.getElementById('marks-output').textContent = `Marks: ${marks.join(', ')}\nHighest: ${highestMark}\nLowest: ${lowestMark}\nAverage: ${averageMark.toFixed(2)}`;
+
+    const students = [
+      { name: 'Rahul', age: 20, marks: 82 },
+      { name: 'Aditi', age: 22, marks: 91 },
+      { name: 'Aman', age: 19, marks: 76 }
+    ];
+
+    function renderStudents() {
+      const container = document.getElementById('student-records-output');
+      const topStudents = students.filter(student => student.marks >= 80);
+      const average = (students.reduce((sum, student) => sum + student.marks, 0) / students.length).toFixed(2);
+      container.innerHTML = `
+        <h4>All Students</h4>
+        <pre>${students.map(student => `Name: ${student.name}, Age: ${student.age}, Marks: ${student.marks}`).join('\n')}</pre>
+        <h4>Students with marks ≥ 80</h4>
+        <pre>${topStudents.length > 0 ? topStudents.map(student => `${student.name} (${student.marks})`).join(', ') : 'None'}</pre>
+        <h4>Class Average</h4>
+        <pre>${average}</pre>
+      `;
+    }
+
+    function addStudent(name, age, marks) {
+      students.push({ name, age: Number(age), marks: Number(marks) });
+      renderStudents();
+    }
+
+    document.getElementById('student-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('student-name').value.trim();
+      const age = document.getElementById('student-age').value;
+      const marksInput = document.getElementById('student-marks').value;
+
+      if (name && age && marksInput) {
+        addStudent(name, age, marksInput);
+        event.target.reset();
+      }
+    });
+
+    renderStudents();
+  </script>
+</body>
+</html>
