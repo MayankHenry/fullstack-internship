@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Day 9 - Introduction to Git & GitHub</title>
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; line-height: 1.6; color: #222; background: #fafafa;}
+    .container {max-width: 900px; margin: 0 auto;}
+    h1, h2, h3 {margin-top: 1.5rem; color: #0f3d7a;}
+    p, li {margin: 0.7rem 0;}
+    pre {background: #f1f5ff; padding: 16px; border-radius: 10px; overflow-x: auto;}
+    ul {padding-left: 1.4rem;}
+    .note {background: #fff8d5; border-left: 4px solid #f9d342; padding: 12px 16px; margin: 1rem 0;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Day 9 – Introduction to Git & GitHub</h1>
+
+    <section>
+      <h2>1. What is Version Control?</h2>
+      <p>Version control helps you track every change in your code. Without it, managing multiple versions and collaborating with others becomes messy.</p>
+      <ul>
+        <li>Git tracks history of file changes.</li>
+        <li>It allows you to rollback bad changes.</li>
+        <li>Multiple developers can work together safely.</li>
+        <li>GitHub provides remote backup and sharing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Installing Git & Setup</h2>
+      <p>Install Git on your machine and set your identity so commits include your name and email.</p>
+      <pre>git config --global user.name "Your Name"
+git config --global user.email "your@email.com"</pre>
+      <div class="note">
+        <strong>Practice Task 1:</strong> Install Git and configure your name and email.
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Creating Your First Repository (Local Git)</h2>
+      <p>Initialize a Git repository inside your project folder, add files, then commit.</p>
+      <pre>cd project-folder
+git init
+git status
+git add .
+git commit -m "Initial commit"</pre>
+      <div class="note">
+        <strong>Practice Task 2:</strong> Create a folder named <code>day9-project</code>, add an <code>index.html</code>, initialize Git, add files, and commit.
+      </div>
+    </section>
+
+    <section>
+      <h2>4. GitHub Basics</h2>
+      <p>GitHub is an online platform for Git repositories. It helps you share projects and build a developer portfolio.</p>
+      <p>To connect your local repo to GitHub:</p>
+      <pre>git remote add origin https://github.com/username/repo.git
+git branch -M main
+git push -u origin main</pre>
+      <div class="note">
+        <strong>Practice Task 3:</strong> Create a GitHub repo named <code>my-first-repo</code> and push your <code>day9-project</code> code to it.
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Common Git Commands</h2>
+      <ul>
+        <li><strong>Clone</strong>: <code>git clone https://github.com/username/repo.git</code></li>
+        <li><strong>Pull</strong>: <code>git pull origin main</code></li>
+        <li><strong>View history</strong>: <code>git log</code></li>
+        <li><strong>Undo changes</strong>: <code>git checkout -- filename</code></li>
+      </ul>
+      <div class="note">
+        <strong>Practice Task 4:</strong> Clone your repo to another folder, edit a file, commit, and push the change.
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Branching in Git</h2>
+      <p>Branches let you work on features without changing the main project.</p>
+      <pre>git branch dev
+git checkout dev
+// make changes
+git commit -m "Add feature"
+git checkout main
+git merge dev</pre>
+      <div class="note">
+        <strong>Practice Task 5:</strong> Create a branch named <code>dev</code>, make a change, commit it, and merge it into <code>main</code>.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>7. GitHub Collaboration (Pull Requests)</h2>
+      <p>A pull request is how you propose changes on GitHub from one branch into another.</p>
+      <p>Workflow:</p>
+      <ol>
+        <li>Fork or branch the repo.</li>
+        <li>Make changes locally.</li>
+        <li>Push the branch to GitHub.</li>
+        <li>Open a pull request.</li>
+      </ol>
+      <div class="note">
+        <strong>Practice Task 6:</strong> Create a new branch on GitHub, push your changes, and open a PR to merge into <code>main</code>.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. Hands-on Mini Project – Publish Website on GitHub</h2>
+      <p>Use your HTML + CSS website from Day 1–2. Initialize Git, push it to a repo named <code>portfolio-site</code>, and enable GitHub Pages.</p>
+      <p>Expected live URL:</p>
+      <pre>https://username.github.io/portfolio-site/</pre>
+    </section>
+
+    <section>
+      <h2>9. Recap</h2>
+      <ul>
+        <li>Git tracks code changes; GitHub stores repositories remotely.</li>
+        <li>Learned commands: <code>git init</code>, <code>add</code>, <code>commit</code>, <code>push</code>, <code>pull</code>, <code>branch</code>.</li>
+        <li>Practiced collaboration with branching and pull requests.</li>
+        <li>Published a project using GitHub Pages.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Assignments</h2>
+      <ol>
+        <li>Create a new repo for your JavaScript mini-project (Day 4 Number Guessing Game) and push it to GitHub.</li>
+        <li>Create a branch <code>feature</code>, add a <code>README.md</code>, and merge it into <code>main</code>.</li>
+        <li>Fork a popular open-source repo on GitHub and explore its code.</li>
+        <li>Extend your portfolio site: add a README file with project description before pushing.</li>
+      </ol>
+    </section>
+  </div>
+</body>
+</html>

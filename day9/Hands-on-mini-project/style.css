@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #eef2f7;
+  color: #1f2937;
+}
+
+.hero {
+  background: linear-gradient(135deg, #1f4d8f, #4c84ff);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  margin-bottom: 16px;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.button {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #f3f4ff;
+  color: #1f4d8f;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.page-container {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  padding: 0 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(15, 45, 84, 0.12);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card ul {
+  padding-left: 1.2rem;
+}
