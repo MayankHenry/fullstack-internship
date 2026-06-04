@@ -1,0 +1,15 @@
+{
+  "name": "day11-node-hello-server",
+  "version": "1.0.0",
+  "description": "Day 11 Node.js mini project: basic HTTP server",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "hello": "node hello.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "moment": "^2.29.4"
+  }
+}
