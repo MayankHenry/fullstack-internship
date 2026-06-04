@@ -1,0 +1,13 @@
+{
+  "name": "day12-express-info-server",
+  "version": "1.0.0",
+  "description": "Day 12 Express.js mini project: info server with routing and middleware",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.4"
+  }
+}
