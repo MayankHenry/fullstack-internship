@@ -1,0 +1,21 @@
+{
+  "name": "user-management-api",
+  "version": "1.0.0",
+  "description": "A simple REST API for User Management using Express.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "express",
+    "crud"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

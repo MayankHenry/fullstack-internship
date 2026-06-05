@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 13 - REST API Tasks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .task-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+        }
+
+        .task-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .task-section p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .checklist li {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #764ba2;
+            padding-left: 15px;
+        }
+
+        .checklist li:before {
+            content: "✓ ";
+            color: #764ba2;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .difficulty.easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty.hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .hint {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .hint strong {
+            color: #2196F3;
+        }
+
+        .resources {
+            background: #f0f7ff;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .resources h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .resources ul {
+            margin-left: 20px;
+        }
+
+        .resources li {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Day 13 - REST API Tasks</h1>
+            <p>Practice Implementing GET, POST, PUT, DELETE with Express.js</p>
+        </div>
+
+        <div class="content">
+            <!-- Task 1 -->
+            <div class="task-section">
+                <span class="difficulty easy">Easy</span>
+                <h2>Task 1: Create Route for Single User by ID</h2>
+                <p><span class="highlight">Status:</span> Practice Task from Lesson</p>
+                
+                <p><strong>Objective:</strong> Implement a route that returns a single user by their ID.</p>
+                
+                <p><strong>Requirements:</strong></p>
+                <ul class="checklist">
+                    <li>Route: GET /users/:id</li>
+                    <li>Return user object if found</li>
+                    <li>Return 404 error if user not found</li>
+                    <li>Use find() method to locate user</li>
+                </ul>
+
+                <div class="code-block">
+// Expected implementation
+app.get("/users/:id", (req, res) => {
+    const user = users.find(u => u.id == req.params.id);
+    if (!user) return res.status(404).json({msg: "User not found"});
+    res.json(user);
+});
+                </div>
+
+                <div class="hint">
+                    <strong>💡 Hint:</strong> Use parseInt() to convert the route parameter to a number before comparison.
+                </div>
+            </div>
+
+            <!-- Task 2 -->
+            <div class="task-section">
+                <span class="difficulty easy">Easy</span>
+                <h2>Task 2: Search Users by Name</h2>
+                <p><span class="highlight">Status:</span> Assignment #1</p>
+                
+                <p><strong>Objective:</strong> Create a search endpoint that filters users by name.</p>
+                
+                <p><strong>Requirements:</strong></p>
+                <ul class="checklist">
+                    <li>Route: GET /users/search?name=Rahul</li>
+                    <li>Use query parameters (req.query.name)</li>
+                    <li>Filter users by name (case-insensitive)</li>
+                    <li>Return array of matching users</li>
+                    <li>Handle no matches gracefully</li>
+                </ul>
+
+                <div class="code-block">
+// Expected implementation
+app.get("/users/search", (req, res) => {
+    const name = req.query.name;
+    if (!name) {
+        return res.status(400).json({msg: "Please provide a name"});
+    }
+    const results = users.filter(u => 
+        u.name.toLowerCase().includes(name.toLowerCase())
+    );
+    res.json(results);
+});
+                </div>
+
+                <div class="hint">
+                    <strong>💡 Hint:</strong> Use toLowerCase() for case-insensitive matching. Test with: 
+                    <code style="background: #f0f0f0; padding: 2px 6px;">GET /users/search?name=rahul</code>
+                </div>
+            </div>
+
+            <!-- Task 3 -->
+            <div class="task-section">
+                <span class="difficulty medium">Medium</span>
+                <h2>Task 3: Add Age Field and Filter Adults</h2>
+                <p><span class="highlight">Status:</span> Assignment #2</p>
+                
+                <p><strong>Objective:</strong> Extend the user model with age and create filtering logic.</p>
+                
+                <p><strong>Requirements:</strong></p>
+                <ul class="checklist">
+                    <li>Add 'age' field to user objects</li>
+                    <li>Validate age (0-150 range)</li>
+                    <li>Create GET /users/adults endpoint</li>
+                    <li>Return only users with age ≥ 18</li>
+                    <li>Handle users without age field</li>
+                </ul>
+
+                <div class="code-block">
+// Add age to sample data
+let users = [
+    {id: 1, name: "Rahul", email: "rahul@example.com", age: 22},
+    {id: 2, name: "Aditi", email: "aditi@example.com", age: 16}
+];
+
+// Adults filter route
+app.get("/users/adults", (req, res) => {
+    const adults = users.filter(u => u.age && u.age >= 18);
+    res.json(adults);
+});
+                </div>
+
+                <div class="hint">
+                    <strong>💡 Hint:</strong> In POST/PUT routes, validate age: 
+                    <code style="background: #f0f0f0; padding: 2px 6px;">if (age < 0 || age > 150) { error }</code>
+                </div>
+            </div>
+
+            <!-- Task 4 -->
+            <div class="task-section">
+                <span class="difficulty medium">Medium</span>
+                <h2>Task 4: Extract and Return Only Emails</h2>
+                <p><span class="highlight">Status:</span> Assignment #3</p>
+                
+                <p><strong>Objective:</strong> Create an endpoint that returns specific user fields.</p>
+                
+                <p><strong>Requirements:</strong></p>
+                <ul class="checklist">
+                    <li>Route: GET /users/emails</li>
+                    <li>Return only id, name, and email fields</li>
+                    <li>Use map() to transform data</li>
+                    <li>Include total count in response</li>
+                </ul>
+
+                <div class="code-block">
+// Expected implementation
+app.get("/users/emails", (req, res) => {
+    const emails = users.map(u => ({
+        id: u.id,
+        name: u.name,
+        email: u.email
+    }));
+    res.json({
+        count: emails.length,
+        data: emails
+    });
+});
+                </div>
+
+                <div class="hint">
+                    <strong>💡 Hint:</strong> Use array.map() to extract specific fields. This is useful for privacy (hiding sensitive data).
+                </div>
+            </div>
+
+            <!-- Task 5 -->
+            <div class="task-section">
+                <span class="difficulty hard">Hard</span>
+                <h2>Task 5: Advanced Filtering with Multiple Parameters</h2>
+                <p><span class="highlight">Status:</span> Challenge Task</p>
+                
+                <p><strong>Objective:</strong> Create a flexible filtering endpoint with multiple query parameters.</p>
+                
+                <p><strong>Requirements:</strong></p>
+                <ul class="checklist">
+                    <li>Route: GET /users/filter</li>
+                    <li>Support query params: name, minAge, maxAge</li>
+                    <li>All parameters are optional</li>
+                    <li>Combine filters using AND logic</li>
+                    <li>Return filtered results with count</li>
+                </ul>
+
+                <div class="code-block">
+// Expected implementation
+app.get("/users/filter", (req, res) => {
+    let filtered = users;
+    
+    if (req.query.name) {
+        filtered = filtered.filter(u => 
+            u.name.toLowerCase().includes(req.query.name.toLowerCase())
+        );
+    }
+    
+    if (req.query.minAge) {
+        filtered = filtered.filter(u => u.age >= parseInt(req.query.minAge));
+    }
+    
+    if (req.query.maxAge) {
+        filtered = filtered.filter(u => u.age <= parseInt(req.query.maxAge));
+    }
+    
+    res.json({count: filtered.length, data: filtered});
+});
+                </div>
+
+                <div class="hint">
+                    <strong>💡 Hint:</strong> Test with: <code style="background: #f0f0f0; padding: 2px 6px;">GET /users/filter?name=Rahul&minAge=20&maxAge=30</code>
+                </div>
+            </div>
+
+            <!-- Task 6 -->
+            <div class="task-section">
+                <span class="difficulty hard">Hard</span>
+                <h2>Task 6: Implement User Validation Middleware</h2>
+                <p><span class="highlight">Status:</span> Challenge Task</p>
+                
+                <p><strong>Objective:</strong> Create a reusable validation middleware for POST/PUT requests.</p>
+                
+                <p><strong>Requirements:</strong></p>
+                <ul class="checklist">
+                    <li>Create a middleware function</li>
+                    <li>Validate name (required, non-empty)</li>
+                    <li>Validate email (required, basic format check)</li>
+                    <li>Validate age (optional, 0-150 range)</li>
+                    <li>Apply middleware to POST and PUT routes</li>
+                </ul>
+
+                <div class="code-block">
+// Middleware function
+const validateUser = (req, res, next) => {
+    if (!req.body.name || req.body.name.trim() === "") {
+        return res.status(400).json({msg: "Name is required"});
+    }
+    if (!req.body.email || !req.body.email.includes("@")) {
+        return res.status(400).json({msg: "Valid email is required"});
+    }
+    if (req.body.age && (req.body.age < 0 || req.body.age > 150)) {
+        return res.status(400).json({msg: "Age must be 0-150"});
+    }
+    next();
+};
+
+// Use middleware
+app.post("/users", validateUser, (req, res) => {
+    // ... create user logic
+});
+                </div>
+
+                <div class="hint">
+                    <strong>💡 Hint:</strong> Call next() to pass control to the next middleware/handler.
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="resources">
+                <h3>📚 Resources & Testing Tools</h3>
+                <ul>
+                    <li><strong>Postman:</strong> Download free from https://www.postman.com/downloads/</li>
+                    <li><strong>curl:</strong> Test API from terminal: <code style="background: #f0f0f0; padding: 2px 6px;">curl http://localhost:3000/users</code></li>
+                    <li><strong>VS Code REST Client:</strong> Install extension, create .rest files</li>
+                    <li><strong>Express Documentation:</strong> https://expressjs.com/</li>
+                    <li><strong>HTTP Status Codes:</strong> 200 (OK), 201 (Created), 400 (Bad Request), 404 (Not Found)</li>
+                </ul>
+            </div>
+
+            <!-- Testing Guide -->
+            <div class="resources" style="border-color: #764ba2; background: #f7f0ff;">
+                <h3 style="color: #764ba2;">🧪 Quick Testing Guide with curl</h3>
+                <div class="code-block">
+# Get all users
+curl http://localhost:3000/users
+
+# Get specific user
+curl http://localhost:3000/users/1
+
+# Add new user
+curl -X POST http://localhost:3000/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John","email":"john@example.com","age":25}'
+
+# Update user
+curl -X PUT http://localhost:3000/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"age":26}'
+
+# Delete user
+curl -X DELETE http://localhost:3000/users/1
+
+# Search by name
+curl "http://localhost:3000/users/search?name=Rahul"
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Day 13 - REST API Tasks | Keep Learning! 🚀</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Complete all tasks and push to GitHub for practice.</p>
+        </footer>
+    </div>
+</body>
+</html>
