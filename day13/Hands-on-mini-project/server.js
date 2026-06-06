@@ -1,21 +1,27 @@
 const express = require("express");
-const app = express();
+const mongoose = require("mongoose");
+const User = require("./models/User");
 
-// Middleware to parse JSON
+const app = express();
 app.use(express.json());
 
-// Sample data store (in-memory)
-let users = [
-    { id: 1, name: "Rahul", email: "rahul@example.com", age: 22 },
-    { id: 2, name: "Aditi", email: "aditi@example.com", age: 25 }
-];
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/userdb";
 
-let nextId = 3;
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log("✓ MongoDB connected"))
+.catch(err => {
+    console.error("MongoDB connection error:", err.message);
+    process.exit(1);
+});
 
 // ============= BASIC ROUTES =============
 
 // GET - Retrieve all users
-app.get("/users", (req, res) => {
+app.get("/users", async (req, res) => {
+    const users = await User.find();
     res.json({
         success: true,
         count: users.length,
@@ -24,157 +30,117 @@ app.get("/users", (req, res) => {
 });
 
 // GET - Retrieve a single user by ID
-app.get("/users/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const user = users.find(u => u.id === id);
+app.get("/users/:id", async (req, res) => {
+    const id = req.params.id;
 
-    if (!user) {
-        return res.status(404).json({
-            success: false,
-            msg: "User not found"
-        });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, msg: "Invalid user ID" });
     }
 
-    res.json({
-        success: true,
-        data: user
-    });
+    const user = await User.findById(id);
+
+    if (!user) {
+        return res.status(404).json({ success: false, msg: "User not found" });
+    }
+
+    res.json({ success: true, data: user });
 });
 
 // POST - Create a new user
-app.post("/users", (req, res) => {
-    // Validation
-    if (!req.body.name || !req.body.email) {
-        return res.status(400).json({
-            success: false,
-            msg: "Name and Email are required"
-        });
+app.post("/users", async (req, res) => {
+    const { name, email, age, isActive } = req.body;
+
+    if (!name || !email) {
+        return res.status(400).json({ success: false, msg: "Name and Email are required" });
     }
 
-    if (req.body.age && (req.body.age < 0 || req.body.age > 150)) {
-        return res.status(400).json({
-            success: false,
-            msg: "Please provide a valid age"
-        });
+    if (age !== undefined && (age < 0 || age > 150)) {
+        return res.status(400).json({ success: false, msg: "Please provide a valid age" });
     }
 
-    const newUser = {
-        id: nextId++,
-        name: req.body.name,
-        email: req.body.email,
-        age: req.body.age || null
-    };
+    const newUser = new User({ name, email, age, isActive });
+    await newUser.save();
 
-    users.push(newUser);
-
-    res.status(201).json({
-        success: true,
-        msg: "User created successfully",
-        data: newUser
-    });
+    res.status(201).json({ success: true, msg: "User created successfully", data: newUser });
 });
 
 // PUT - Update a user by ID
-app.put("/users/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const user = users.find(u => u.id === id);
+app.put("/users/:id", async (req, res) => {
+    const id = req.params.id;
+    const { name, email, age, isActive } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, msg: "Invalid user ID" });
+    }
+
+    if (age !== undefined && (age < 0 || age > 150)) {
+        return res.status(400).json({ success: false, msg: "Please provide a valid age" });
+    }
+
+    const user = await User.findById(id);
 
     if (!user) {
-        return res.status(404).json({
-            success: false,
-            msg: "User not found"
-        });
+        return res.status(404).json({ success: false, msg: "User not found" });
     }
 
-    // Validate age if provided
-    if (req.body.age && (req.body.age < 0 || req.body.age > 150)) {
-        return res.status(400).json({
-            success: false,
-            msg: "Please provide a valid age"
-        });
-    }
+    if (name !== undefined) user.name = name;
+    if (email !== undefined) user.email = email;
+    if (age !== undefined) user.age = age;
+    if (isActive !== undefined) user.isActive = isActive;
 
-    // Update only provided fields
-    if (req.body.name) user.name = req.body.name;
-    if (req.body.email) user.email = req.body.email;
-    if (req.body.age !== undefined) user.age = req.body.age;
+    await user.save();
 
-    res.json({
-        success: true,
-        msg: "User updated successfully",
-        data: user
-    });
+    res.json({ success: true, msg: "User updated successfully", data: user });
 });
 
 // DELETE - Remove a user by ID
-app.delete("/users/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const initialLength = users.length;
+app.delete("/users/:id", async (req, res) => {
+    const id = req.params.id;
 
-    users = users.filter(u => u.id !== id);
-
-    if (users.length === initialLength) {
-        return res.status(404).json({
-            success: false,
-            msg: "User not found"
-        });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, msg: "Invalid user ID" });
     }
 
-    res.json({
-        success: true,
-        msg: "User deleted successfully"
-    });
+    const result = await User.findByIdAndDelete(id);
+
+    if (!result) {
+        return res.status(404).json({ success: false, msg: "User not found" });
+    }
+
+    res.json({ success: true, msg: "User deleted successfully" });
 });
 
-// ============= ADDITIONAL ROUTES (ASSIGNMENTS) =============
+// ============= ADDITIONAL ROUTES =============
 
 // GET - Search users by name (query parameter)
-app.get("/users/search/by-name", (req, res) => {
+app.get("/users/search/by-name", async (req, res) => {
     const name = req.query.name;
 
     if (!name) {
-        return res.status(400).json({
-            success: false,
-            msg: "Please provide a name to search"
-        });
+        return res.status(400).json({ success: false, msg: "Please provide a name to search" });
     }
 
-    const searchResults = users.filter(u =>
-        u.name.toLowerCase().includes(name.toLowerCase())
-    );
+    const searchResults = await User.find({
+        name: { $regex: name, $options: "i" }
+    });
 
     if (searchResults.length === 0) {
-        return res.status(404).json({
-            success: false,
-            msg: `No users found with name containing "${name}"`
-        });
+        return res.status(404).json({ success: false, msg: `No users found with name containing "${name}"` });
     }
 
-    res.json({
-        success: true,
-        count: searchResults.length,
-        data: searchResults
-    });
+    res.json({ success: true, count: searchResults.length, data: searchResults });
 });
 
 // GET - Get all adult users (age >= 18)
-app.get("/users/filter/adults", (req, res) => {
-    const adults = users.filter(u => u.age && u.age >= 18);
+app.get("/users/filter/adults", async (req, res) => {
+    const adults = await User.find({ age: { $gte: 18 } });
 
-    res.json({
-        success: true,
-        count: adults.length,
-        data: adults
-    });
+    res.json({ success: true, count: adults.length, data: adults });
 });
 
 // GET - Get only emails of all users
-app.get("/users/extract/emails", (req, res) => {
-    const emails = users.map(u => ({
-        id: u.id,
-        name: u.name,
-        email: u.email
-    }));
+app.get("/users/extract/emails", async (req, res) => {
+    const emails = await User.find({}, { name: 1, email: 1 });
 
     res.json({
         success: true,
@@ -183,19 +149,34 @@ app.get("/users/extract/emails", (req, res) => {
     });
 });
 
+// GET - Get only active users
+app.get("/users/active", async (req, res) => {
+    const activeUsers = await User.find({ isActive: true });
+
+    res.json({ success: true, count: activeUsers.length, data: activeUsers });
+});
+
+// GET - Get users older than a given age
+app.get("/users/age/:min", async (req, res) => {
+    const minAge = parseInt(req.params.min, 10);
+
+    if (Number.isNaN(minAge)) {
+        return res.status(400).json({ success: false, msg: "Please provide a valid age" });
+    }
+
+    const users = await User.find({ age: { $gte: minAge } });
+
+    res.json({ success: true, count: users.length, data: users });
+});
+
 // ============= ERROR HANDLING =============
 
-// 404 - Route not found
 app.use((req, res) => {
-    res.status(404).json({
-        success: false,
-        msg: "Route not found",
-        path: req.path
-    });
+    res.status(404).json({ success: false, msg: "Route not found", path: req.path });
 });
 
 // Start server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`✓ API running at http://localhost:${PORT}`);
     console.log(`✓ Available routes:`);
@@ -207,4 +188,6 @@ app.listen(PORT, () => {
     console.log(`  GET    /users/search/by-name?name=<name>`);
     console.log(`  GET    /users/filter/adults`);
     console.log(`  GET    /users/extract/emails`);
+    console.log(`  GET    /users/active`);
+    console.log(`  GET    /users/age/:min`);
 });

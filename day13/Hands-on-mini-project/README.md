@@ -1,6 +1,6 @@
-# User Management API - Day 13 Mini Project
+# User Management API - Day 13 Mini Project (MongoDB)
 
-A simple REST API built with **Express.js** for managing users with **GET, POST, PUT, DELETE** operations.
+A REST API built with **Express.js** and **MongoDB** using **Mongoose** to persist users.
 
 ---
 
@@ -8,6 +8,8 @@ A simple REST API built with **Express.js** for managing users with **GET, POST,
 
 ```
 user-management-api/
+├── models/
+│   └── User.js
 ├── package.json
 ├── server.js
 └── README.md
@@ -22,12 +24,32 @@ user-management-api/
    npm install
    ```
 
-2. **Start the server:**
+2. **Start MongoDB locally:**
+   - If installed locally, run:
+     ```bash
+     mongod
+     ```
+   - Or use MongoDB Atlas and set `MONGODB_URI`.
+
+3. **Start the server:**
    ```bash
-   npm start
+   MONGODB_URI="mongodb://127.0.0.1:27017/userdb" npm start
    ```
 
    The API will run at: `http://localhost:3000`
+
+   If `MONGODB_URI` is not provided, the app defaults to `mongodb://127.0.0.1:27017/userdb`.
+
+---
+
+## **MongoDB User Model**
+
+Users are stored with the following schema:
+
+- `name` (String, required)
+- `email` (String, required)
+- `age` (Number)
+- `isActive` (Boolean, default: true)
 
 ---
 
@@ -35,168 +57,62 @@ user-management-api/
 
 ### **1. GET All Users**
 - **Endpoint:** `GET /users`
-- **Description:** Retrieve all users from the system
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "count": 2,
-    "data": [
-      { "id": 1, "name": "Rahul", "email": "rahul@example.com", "age": 22 },
-      { "id": 2, "name": "Aditi", "email": "aditi@example.com", "age": 25 }
-    ]
-  }
-  ```
-
----
+- **Description:** Retrieve all users from MongoDB
 
 ### **2. GET Single User by ID**
 - **Endpoint:** `GET /users/:id`
-- **Description:** Retrieve a specific user by their ID
-- **Example:** `GET /users/1`
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "data": { "id": 1, "name": "Rahul", "email": "rahul@example.com", "age": 22 }
-  }
-  ```
-- **Error Response (404):**
-  ```json
-  {
-    "success": false,
-    "msg": "User not found"
-  }
-  ```
-
----
+- **Description:** Retrieve a specific user by MongoDB ObjectId
 
 ### **3. CREATE New User**
 - **Endpoint:** `POST /users`
-- **Description:** Add a new user to the system
-- **Request Body:**
+- **Description:** Add a new user to the database
+- **Request Body Example:**
   ```json
   {
     "name": "Aman",
     "email": "aman@example.com",
-    "age": 20
+    "age": 20,
+    "isActive": true
   }
   ```
-- **Response Example (201 Created):**
-  ```json
-  {
-    "success": true,
-    "msg": "User created successfully",
-    "data": { "id": 3, "name": "Aman", "email": "aman@example.com", "age": 20 }
-  }
-  ```
-- **Validation Error (400):**
-  ```json
-  {
-    "success": false,
-    "msg": "Name and Email are required"
-  }
-  ```
-
----
 
 ### **4. UPDATE User by ID**
 - **Endpoint:** `PUT /users/:id`
-- **Description:** Update user details
-- **Example:** `PUT /users/1`
-- **Request Body (partial update):**
-  ```json
-  {
-    "name": "Rahul Kumar",
-    "age": 23
-  }
-  ```
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "msg": "User updated successfully",
-    "data": { "id": 1, "name": "Rahul Kumar", "email": "rahul@example.com", "age": 23 }
-  }
-  ```
-
----
+- **Description:** Update user details by ObjectId
 
 ### **5. DELETE User by ID**
 - **Endpoint:** `DELETE /users/:id`
-- **Description:** Remove a user from the system
-- **Example:** `DELETE /users/2`
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "msg": "User deleted successfully"
-  }
-  ```
-- **Error Response (404):**
-  ```json
-  {
-    "success": false,
-    "msg": "User not found"
-  }
-  ```
+- **Description:** Remove a user from the database
 
 ---
 
-## **Additional Routes (Bonus Assignments)**
+## **Additional Routes**
 
-### **6. Search Users by Name**
-- **Endpoint:** `GET /users/search/by-name?name=<name>`
-- **Description:** Find users by name (case-insensitive)
-- **Example:** `GET /users/search/by-name?name=Rahul`
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "count": 1,
-    "data": [{ "id": 1, "name": "Rahul", "email": "rahul@example.com", "age": 22 }]
-  }
-  ```
+### **Search Users by Name**
+- `GET /users/search/by-name?name=<name>`
 
----
+### **Get Adult Users**
+- `GET /users/filter/adults`
 
-### **7. Get Adult Users (Age >= 18)**
-- **Endpoint:** `GET /users/filter/adults`
-- **Description:** Retrieve all users who are 18 years or older
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "count": 2,
-    "data": [
-      { "id": 1, "name": "Rahul", "email": "rahul@example.com", "age": 22 },
-      { "id": 2, "name": "Aditi", "email": "aditi@example.com", "age": 25 }
-    ]
-  }
-  ```
+### **Get All User Emails**
+- `GET /users/extract/emails`
+
+### **Get Users Older Than a Value**
+- `GET /users/age/:min`
+- Returns users whose age is greater than or equal to `:min`
+
+### **Get Only Active Users**
+- `GET /users/active`
+- Returns users whose `isActive` field is `true`
 
 ---
 
-### **8. Get All User Emails**
-- **Endpoint:** `GET /users/extract/emails`
-- **Description:** Extract only email information from all users
-- **Response Example:**
-  ```json
-  {
-    "success": true,
-    "count": 2,
-    "data": [
-      { "id": 1, "name": "Rahul", "email": "rahul@example.com" },
-      { "id": 2, "name": "Aditi", "email": "aditi@example.com" }
-    ]
-  }
-  ```
+## **Assignment Ideas**
 
----
-
-## **Testing with Postman**
-
-1. **Open Postman** or use curl in terminal
+1. Add a `Product` model with `name`, `price`, and `category`, then build CRUD routes.
+2. Extend the user schema with more fields and query only active users.
+3. Add route `GET /users/age/:min` to fetch users older than the given age.
+4. Push your MongoDB-connected API to GitHub.
 
 2. **Test Examples:**
 
