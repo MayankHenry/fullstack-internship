@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 14 - Database Tasks</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #232526, #414345);
+            color: #f4f4f4;
+        }
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 3rem;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .task-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        .task-card h2 {
+            margin-top: 0;
+            color: #a5b4fc;
+        }
+        .task-card p,
+        .task-card li {
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+        .task-card ul {
+            padding-left: 20px;
+        }
+        .task-badge {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background: #2563eb;
+            color: white;
+        }
+        .code {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 16px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>Day 14 - Database Tasks</h1>
+            <p>Practice MongoDB integration, Mongoose models, and database-backed API routes.</p>
+        </header>
+
+        <div class="task-card">
+            <span class="task-badge">Task 1</span>
+            <h2>Understand Database Types</h2>
+            <p>Write a short summary for each of these:</p>
+            <ul>
+                <li>Relational database (SQL): how tables, rows, and fixed schemas work.</li>
+                <li>Non-relational database (NoSQL): how documents and flexible schemas work.</li>
+                <li>Why MongoDB is a good fit for Node.js apps.</li>
+            </ul>
+        </div>
+
+        <div class="task-card">
+            <span class="task-badge">Task 2</span>
+            <h2>Connect Express to MongoDB</h2>
+            <p>Update your server to use Mongoose and connect to a database.</p>
+            <div class="code">
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/userdb")
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error(err));
+            </div>
+            <ul>
+                <li>Install Mongoose with <code>npm install mongoose</code>.</li>
+                <li>Use local MongoDB or MongoDB Atlas.</li>
+                <li>Ensure the server fails fast if the connection cannot be established.</li>
+            </ul>
+        </div>
+
+        <div class="task-card">
+            <span class="task-badge">Task 3</span>
+            <h2>Create a User Schema</h2>
+            <p>Create a Mongoose model in <code>models/User.js</code> with these fields:</p>
+            <ul>
+                <li><code>name</code>: String, required</li>
+                <li><code>email</code>: String, required</li>
+                <li><code>age</code>: Number</li>
+                <li><code>isActive</code>: Boolean, default true</li>
+            </ul>
+            <div class="code">
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number,
+  isActive: Boolean
+});
+
+module.exports = mongoose.model("User", userSchema);
+            </div>
+        </div>
+
+        <div class="task-card">
+            <span class="task-badge">Task 4</span>
+            <h2>Replace In-Memory Users with MongoDB</h2>
+            <p>Update these routes to use the database instead of an array:</p>
+            <ul>
+                <li><code>GET /users</code></li>
+                <li><code>POST /users</code></li>
+                <li><code>PUT /users/:id</code></li>
+                <li><code>DELETE /users/:id</code></li>
+            </ul>
+            <p>Use Mongoose methods like <code>find()</code>, <code>findById()</code>, <code>save()</code>, and <code>findByIdAndDelete()</code>.</p>
+        </div>
+
+        <div class="task-card">
+            <span class="task-badge">Task 5</span>
+            <h2>Add New Database Routes</h2>
+            <p>Implement these extra routes:</p>
+            <ul>
+                <li><code>GET /users/active</code> → only active users</li>
+                <li><code>GET /users/age/:min</code> → users older than the given age</li>
+                <li><code>GET /users/search/by-name?name=&lt;name&gt;</code> → case-insensitive search</li>
+            </ul>
+        </div>
+
+        <div class="task-card">
+            <span class="task-badge">Assignment</span>
+            <h2>Extend Your Database API</h2>
+            <ul>
+                <li>Create a <code>Product</code> model with <code>name</code>, <code>price</code>, and <code>category</code>.</li>
+                <li>Add CRUD routes for products.</li>
+                <li>Update the user schema so <code>isActive</code> is saved and query active users.</li>
+                <li>Push your project to GitHub.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Tip: Use Postman or curl to test each endpoint and confirm data stays after server restart.</p>
+        </footer>
+    </div>
+</body>
+</html>
