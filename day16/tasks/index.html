@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 16 - Auth API Tasks</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f2937, #0f172a);
+            color: #e2e8f0;
+        }
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        header h1 {
+            margin-bottom: 10px;
+            color: #93c5fd;
+            font-size: 3rem;
+        }
+        header p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.4);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #60a5fa;
+        }
+        .card ul {
+            padding-left: 20px;
+        }
+        .card li {
+            line-height: 1.8;
+        }
+        .code {
+            background: #020617;
+            color: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>Day 16 - Authentication Tasks</h1>
+            <p>Build a secure auth API using MongoDB, bcrypt hashing, and JWT.</p>
+        </header>
+
+        <div class="card">
+            <h2>Task 1: Signup</h2>
+            <p>Create a new user using <code>POST /signup</code>.</p>
+            <ul>
+                <li>Send <code>name</code>, <code>email</code>, and <code>password</code>.</li>
+                <li>Confirm the password is hashed in the database.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 2: Login</h2>
+            <p>Login with <code>POST /login</code> and get a JWT.</p>
+            <ul>
+                <li>Use the correct password to receive a token.</li>
+                <li>Use a wrong password to test invalid credentials.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 3: Protected Profile</h2>
+            <p>Access <code>GET /profile</code> with your token.</p>
+            <ul>
+                <li>Add <code>Authorization: Bearer &lt;token&gt;</code> header.</li>
+                <li>Verify the route is rejected without a token.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 4: Add Authorization</h2>
+            <p>Extend your model and routes for roles.</p>
+            <ul>
+                <li>Store a <code>role</code> field with default <code>user</code>.</li>
+                <li>Protect <code>/admin</code> so only admins can access it.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 5: Secure Error Handling</h2>
+            <ul>
+                <li>Show clear validation errors on signup.</li>
+                <li>Return proper error codes for invalid token or auth failure.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Tip: Use Postman or curl for signup/login, then send the JWT in the Authorization header.</p>
+        </footer>
+    </div>
+</body>
+</html>
