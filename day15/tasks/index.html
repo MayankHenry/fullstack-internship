@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 15 - MongoDB CRUD Tasks</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e2e8f0;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            margin-bottom: 8px;
+            font-size: 3rem;
+            color: #93c5fd;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #60a5fa;
+        }
+        .card ul {
+            padding-left: 20px;
+        }
+        .card li {
+            line-height: 1.8;
+        }
+        .code {
+            background: #020617;
+            color: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>Day 15 - MongoDB CRUD Tasks</h1>
+            <p>Build and test a user API backed by MongoDB using Mongoose.</p>
+        </header>
+
+        <div class="card">
+            <h2>Task 1: Create users</h2>
+            <p>Use `POST /users` to add three users with unique emails.</p>
+            <ul>
+                <li>Example body: <code>{ "name": "Rahul", "email": "rahul@example.com", "age": 22 }</code></li>
+                <li>Confirm each user is saved by calling `GET /users`.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 2: Read users</h2>
+            <ul>
+                <li>Fetch all users younger than 25.</li>
+                <li>Fetch one user by email using `GET /users` and a filter in your client.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 3: Update users</h2>
+            <ul>
+                <li>Update a user’s email address with `PUT /users/:id`.</li>
+                <li>Increase the age of all users by +1 (test with multiple `PUT` requests).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 4: Delete users</h2>
+            <ul>
+                <li>Delete one user by ID.</li>
+                <li>Delete all users older than 60 by calling `GET /users`, then deleting each match.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 5: Query filters</h2>
+            <ul>
+                <li>Find users aged between 20 and 30.</li>
+                <li>Find users whose name is either <strong>Aman</strong> or <strong>Neha</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task 6: Validation</h2>
+            <ul>
+                <li>Try creating a user without a name — the API should return an error.</li>
+                <li>Try creating a user with an invalid email — the API should return a validation error.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Extra Practice</h2>
+            <ul>
+                <li>Build `GET /users/average-age` to return the average age of all users.</li>
+                <li>Try adding a `role` field to the schema later and fetch all admins.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Tip: Start MongoDB locally before running the project, or set `MONGODB_URI` for Atlas.</p>
+        </footer>
+    </div>
+</body>
+</html>
