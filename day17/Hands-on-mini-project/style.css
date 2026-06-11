@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; margin: 24px; }
+h1 { margin-bottom: 8px }
+form { margin-bottom: 12px }
+input { margin-right: 8px; padding: 6px }
+table { border-collapse: collapse; width: 100%; margin-top: 12px }
+th, td { border: 1px solid #ddd; padding: 8px }
+th { background: #f3f3f3 }
+.controls { display:flex; align-items:center; gap:12px }
+.hidden { display:none }
