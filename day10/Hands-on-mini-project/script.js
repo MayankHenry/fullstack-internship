@@ -7,10 +7,9 @@ const projects = [
 ];
 
 const projectList = document.getElementById("project-list");
-const themeToggle = document.getElementById("themeToggle");
-const contactForm = document.getElementById("contactForm");
-const formMessage = document.getElementById("formMessage");
-const body = document.body;
+const authForm = document.getElementById("authForm");
+const authMessage = document.getElementById("authMessage");
+const apiBaseURL = "https://mayank-portfolio-dtwh.onrender.com";
 
 function renderProjects() {
     projects.forEach((project) => {
@@ -28,37 +27,59 @@ function validatePhone(phone) {
     return /^\+?[0-9\s()-]{7,20}$/.test(phone);
 }
 
-function showMessage(message, color) {
-    formMessage.textContent = message;
-    formMessage.style.color = color;
+function showAuthMessage(message, color) {
+    if (authMessage) {
+        authMessage.textContent = message;
+        authMessage.style.color = color;
+    }
 }
 
-contactForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+if (authForm) {
+    authForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const message = document.getElementById("message").value.trim();
+        const name = document.getElementById("signupName").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+        const password = document.getElementById("signupPassword").value.trim();
 
-    if (!name || !email || !phone || !message) {
-        showMessage("All fields are required!", "#d93025");
-        return;
-    }
+        if (!name || !email || !password) {
+            showAuthMessage("All fields are required.", "#d93025");
+            return;
+        }
 
-    if (!validateEmail(email)) {
-        showMessage("Please enter a valid email address!", "#d93025");
-        return;
-    }
+        if (!validateEmail(email)) {
+            showAuthMessage("Please enter a valid email address.", "#d93025");
+            return;
+        }
 
-    if (!validatePhone(phone)) {
-        showMessage("Please enter a valid phone number!", "#d93025");
-        return;
-    }
+        if (password.length < 6) {
+            showAuthMessage("Password must be at least 6 characters.", "#d93025");
+            return;
+        }
 
-    showMessage("Message sent successfully! Thank you.", "#188038");
-    contactForm.reset();
-});
+        try {
+            const response = await fetch(`${apiBaseURL}/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, email, password }),
+            });
+
+            const result = await response.json();
+            if (!response.ok) {
+                showAuthMessage(result.errors?.[0] || "Signup failed.", "#d93025");
+                return;
+            }
+
+            showAuthMessage("Signup successful! You can now login.", "#188038");
+            authForm.reset();
+        } catch (error) {
+            console.error(error);
+            showAuthMessage("Unable to reach backend. Try again later.", "#d93025");
+        }
+    });
+}
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (event) {
