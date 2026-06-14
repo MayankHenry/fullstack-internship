@@ -1,0 +1,155 @@
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #222;
+  --muted: #666;
+  --primary: #3b82f6;
+  --danger: #ef4444;
+  --success: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 640px;
+  margin: 48px auto;
+  padding: 24px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+}
+
+form {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 160px 100px;
+  margin-bottom: 22px;
+}
+
+input,
+select,
+button {
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 0 16px;
+  font-size: 1rem;
+}
+
+input:focus,
+select:focus,
+button:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+.task-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 12px;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.task-title {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.task-title.completed {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-actions button {
+  min-width: 40px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+.task-actions button.edit {
+  background: #fbbf24;
+  color: #1f2937;
+}
+
+.task-actions button.complete {
+  background: var(--success);
+  color: #fff;
+}
+
+.task-actions button.delete {
+  background: var(--danger);
+  color: #fff;
+}
+
+.empty-state {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed #d1d5db;
+  border-radius: 16px;
+}
+
+@media (max-width: 640px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+}
