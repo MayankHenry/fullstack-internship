@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capstone Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="auth-panel" id="authPanel">
+      <div>
+        <p class="eyebrow">Day 20 Capstone</p>
+        <h1>Task Manager</h1>
+        <p class="intro">Create an account, log in, and manage your personal tasks with categories and due dates.</p>
+      </div>
+
+      <div class="auth-card">
+        <div class="tabs">
+          <button class="tab active" id="showLogin" type="button">Login</button>
+          <button class="tab" id="showSignup" type="button">Signup</button>
+        </div>
+
+        <form id="loginForm" class="form">
+          <label>Email<input type="email" id="loginEmail" required></label>
+          <label>Password<input type="password" id="loginPassword" required></label>
+          <button type="submit">Login</button>
+        </form>
+
+        <form id="signupForm" class="form hidden">
+          <label>Name<input type="text" id="signupName" required></label>
+          <label>Email<input type="email" id="signupEmail" required></label>
+          <label>Password<input type="password" id="signupPassword" minlength="6" required></label>
+          <button type="submit">Create account</button>
+        </form>
+
+        <p id="authMessage" class="message"></p>
+      </div>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal dashboard</p>
+          <h1 id="welcomeTitle">My Tasks</h1>
+        </div>
+        <button class="secondary" id="logoutBtn" type="button">Logout</button>
+      </header>
+
+      <section class="stats">
+        <article><span id="totalCount">0</span><p>Total</p></article>
+        <article><span id="activeCount">0</span><p>Active</p></article>
+        <article><span id="doneCount">0</span><p>Done</p></article>
+      </section>
+
+      <section class="workspace">
+        <form id="taskForm" class="task-form">
+          <input type="hidden" id="taskId">
+          <label>Title<input type="text" id="taskTitle" required></label>
+          <label>Description<textarea id="taskDescription" rows="3"></textarea></label>
+          <div class="form-row">
+            <label>Category<input type="text" id="taskCategory" value="General"></label>
+            <label>Due date<input type="date" id="taskDueDate"></label>
+          </div>
+          <button type="submit" id="saveTaskBtn">Add task</button>
+          <button class="secondary hidden" type="button" id="cancelEditBtn">Cancel edit</button>
+        </form>
+
+        <div class="tasks-panel">
+          <div class="filters">
+            <input type="search" id="searchInput" placeholder="Search tasks">
+            <select id="statusFilter">
+              <option value="">All</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
