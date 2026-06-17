@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A full stack blogging platform where users can read, create, edit, and delete blog posts.">
+  <title>Blog Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <a href="#" class="logo" id="goHome">BlogSpace</a>
+    <div class="nav-actions">
+      <input type="search" id="globalSearch" class="nav-search" placeholder="Search posts...">
+      <div id="guestNav">
+        <button type="button" id="openLoginBtn" class="nav-btn">Login</button>
+        <button type="button" id="openSignupBtn" class="nav-btn primary">Sign up</button>
+      </div>
+      <div id="userNav" class="hidden">
+        <button type="button" id="newPostBtn" class="nav-btn primary">New Post</button>
+        <button type="button" id="myPostsBtn" class="nav-btn">My Posts</button>
+        <span class="user-badge" id="userBadge"></span>
+        <button type="button" id="logoutBtn" class="nav-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="shell">
+
+    <section id="authOverlay" class="overlay hidden">
+      <div class="overlay-card">
+        <button type="button" class="close-btn" id="closeAuth">&times;</button>
+        <div class="tabs">
+          <button class="tab active" id="showLogin" type="button">Login</button>
+          <button class="tab" id="showSignup" type="button">Sign up</button>
+        </div>
+
+        <form id="loginForm" class="form">
+          <label>Email<input type="email" id="loginEmail" required></label>
+          <label>Password<input type="password" id="loginPassword" required></label>
+          <button type="submit">Login</button>
+        </form>
+
+        <form id="signupForm" class="form hidden">
+          <label>Name<input type="text" id="signupName" required></label>
+          <label>Email<input type="email" id="signupEmail" required></label>
+          <label>Password<input type="password" id="signupPassword" minlength="6" required></label>
+          <button type="submit">Create account</button>
+        </form>
+
+        <p id="authMessage" class="message"></p>
+      </div>
+    </section>
+
+    <section id="feedView">
+      <div class="feed-header">
+        <div>
+          <p class="eyebrow">Community Blog</p>
+          <h1>Latest Posts</h1>
+        </div>
+      </div>
+      <div id="postFeed" class="post-feed"></div>
+    </section>
+
+    <section id="singlePostView" class="hidden">
+      <button type="button" class="back-link" id="backToFeed">&larr; Back to posts</button>
+      <article class="full-post" id="fullPost"></article>
+      <div class="comments-area">
+        <h2>Comments</h2>
+        <form id="commentForm" class="comment-form hidden">
+          <textarea id="commentText" rows="3" placeholder="Write a comment..." required></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+        <p id="loginToComment" class="hint">Log in to leave a comment.</p>
+        <div id="commentsList" class="comments-list"></div>
+      </div>
+    </section>
+
+    <section id="editorView" class="hidden">
+      <button type="button" class="back-link" id="backFromEditor">&larr; Cancel</button>
+      <h1 id="editorTitle">New Post</h1>
+      <form id="postForm" class="editor-form">
+        <input type="hidden" id="postId">
+        <label>Title<input type="text" id="postTitleInput" required></label>
+        <label>Excerpt<input type="text" id="postExcerptInput" placeholder="Short summary (auto-generated if empty)"></label>
+        <label>Tags<input type="text" id="postTagsInput" placeholder="Comma separated tags"></label>
+        <label>Content<textarea id="postContentInput" rows="14" required></textarea></label>
+        <div class="editor-actions">
+          <button type="submit" id="savePostBtn">Publish</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>BlogSpace &mdash; Full Stack Blogging Platform</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
